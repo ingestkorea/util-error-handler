@@ -1,0 +1,25 @@
+{
+  "name": "@ingestkorea/util-error-handler",
+  "version": "1.0.1",
+  "description": "INGESTKOREA Util Error Handler for Node.js.",
+  "main": "./dist-cjs/index.js",
+  "module": "./dist-es/index.js",
+  "types": "./dist-types/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && npm run build:cjs && npm run build:es && npm run build:types",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:es": "tsc -p tsconfig.es.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "clean": "rm -rf ./dist-*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ingestkorea/util-error-handler.git"
+  },
+  "author": "ingestkorea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ingestkorea/util-error-handler/issues"
+  },
+  "homepage": "https://github.com/ingestkorea/util-error-handler#readme"
+}
