@@ -11,40 +11,31 @@ npm install @ingestkorea/util-error-handler
 ## Getting Started
 
 ### Import
-```js
+```ts
 // ES5 example
 const { IngestkoreaError } = require('@ingestkorea/util-error-handler');
 ```
 
-```js
+```ts
 // ES6+ example
 import { IngestkoreaError } from '@ingestkorea/util-error-handler';
 ```
 
 ### Usage
 
-Generate custom error instance.
-
-```js
+#### Create custom error instance.
+```ts
 let customError = new IngestkoreaError({
     code: 500, type: 'Internal Server Error',
     message: 'Something Broken', description: 'Unhandled Error'
 });
 ```
 
-Async/await 
-```js
-const sampleVerifyCredentials = async (input: boolean): Promise<{ token: boolean }> => {
-    const result = input ? true : false;
-    return { token: result };
-};
-
-(async () => {
+#### Async/await (sample api response)
+```ts
+const sampleAPIResponseFunction = async (input: boolean) => {
     try {
-        // Sample Verify Credentials Function
-        const { token } = await sampleVerifyCredentials(true);
-
-        if (!token) throw new IngestkoreaError({
+        if (!input) throw new IngestkoreaError({
             code: 401, type: 'Unauthorized',
             message: 'Invalid Credentials', description: 'Access Token Expired'
         });
@@ -55,7 +46,6 @@ const sampleVerifyCredentials = async (input: boolean): Promise<{ token: boolean
             headers: { 'content-type': 'application/json; charset=utf-8' },
             body: JSON.stringify(contents, null, 2)
         };
-
     } catch (err) {
         let customError = new IngestkoreaError({
             code: 500, type: 'Internal Server Error',
@@ -72,7 +62,12 @@ const sampleVerifyCredentials = async (input: boolean): Promise<{ token: boolean
             body: JSON.stringify(contents, null, 2)
         };
     };
-})()
+};
+
+(async () => {
+    const response = await sampleAPIResponseFunction(true | false);
+    console.log(response)
+})();
 ```
 
 
